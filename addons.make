@@ -1,0 +1,6 @@
+ofxNetwork
+ofxAssimpModelLoader
+ofxXmlSettings
+ofxMSAPingPong
+ofxMidi
+ofxUI

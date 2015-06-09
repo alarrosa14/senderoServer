@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<Configuration pixelQuantity='11' installationName='Pentakis'>
+	<Devices>
+		<Device id='1' name='Pentakis' type='mBed' ipAddress='192.168.2.20'
+			UDPPort='6454' enabled='1' />
+	</Devices>
+	<Meshes>
+		<Mesh name='cylinderLong' path='meshes/cylinderLong.obj' />
+	</Meshes>
+	<FrameConf>
+		<!-- pixel types: mesh, line , circle -->
+		<Pixel id='0' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='0' z='1' />
+				<Position x='0.0' y='0.28335' z='0.28335' />
+			</Render>
+		</Pixel>
+		<Pixel id='1' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='0' z='1' />
+				<Position x='0.0' y='0.28335' z='-0.28335' />
+			</Render>
+		</Pixel>
+		<Pixel id='2' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='0' z='1' />
+				<Position x='0.0' y='-0.28335' z='0.28335' />
+			</Render>
+		</Pixel>
+		<Pixel id='3' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='0' z='1' />
+				<Position x='0.0' y='-0.28335' z='-0.28335' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='4' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='0' z='1' />
+				<Up x='0' y='1' z='0' />
+				<Position x='0.28335' y='0.28335' z='0' />
+			</Render>
+		</Pixel>
+       
+		<Pixel id='5' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='0' z='1' />
+				<Up x='0' y='1' z='0' />
+				<Position x='-0.28335' y='0.28335' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='6' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='0' z='1' />
+				<Up x='0' y='1' z='0' />
+				<Position x='-0.28335' y='-0.28335' z='0' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='7' r='255' g='255' b='255' a='255' device='1'>
+            <Render mesh='cylinderLong'>
+				<Front x='0' y='0' z='1' />
+				<Up x='0' y='1' z='0' />
+				<Position x='0.28335' y='-0.28335' z='0' />
+			</Render>
+		</Pixel>
+        
+        
+		<Pixel id='8' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='1' y='0' z='0' />
+				<Position x='0.28335' y='0' z='-0.28335' />
+			</Render>
+		</Pixel>
+		
+        
+        <Pixel id='9' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='1' y='0' z='0' />
+				<Position x='0.28335' y='0' z='0.28335' />
+			</Render>
+		</Pixel>
+        
+       
+		<Pixel id='10' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='1' y='0' z='0' />
+				<Position x='-0.28335' y='0' z='-0.28335' />
+			</Render>
+		</Pixel>
+        
+         <!--
+		<Pixel id='11' r='255' g='255' b='255' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+				<Front x='0.087622' y='-0.229397' z='-0.141775' />
+				<Up x='0.772823590344843' y='0.0614064721897857' z='0.378274647379831' />
+				<Position x='-37.1172' y='22.9397' z='-60.0569' />
+			</Render>
+		</Pixel>
+		-->
+        
+	</FrameConf>
+	<ClientsProxys>
+
+		<Client TCPPort='5002' UDPPort='5003' id='1' name='Sound'
+			enabled='1' blendFactor='0.2' protocolType='0' />
+		<!--<Client TCPPort='6020' UDPPort='6030' id='2' name='Perlin' enabled='1' 
+			blendFactor='0.1' protocolType='1'/> -->
+		<Client TCPPort='6020' UDPPort='6030' id='2' name='Video2'
+			enabled='1' blendFactor='0.1' protocolType='0' />
+		<Client TCPPort='6006' UDPPort='6007' id='3' name='Video'
+			enabled='0' blendFactor='0.2' protocolType='0' />
+		<Client TCPPort='6022' UDPPort='6024' id='4' name='WEB'
+			enabled='0' blendFactor='0.2' protocolType='0' />
+	</ClientsProxys>
+	<MulticastConfig UDPPort='60000' groupAddress='224.0.0.13'
+		broadcastEnabled='0' ipAddress='192.168.2.100' />
+</Configuration>

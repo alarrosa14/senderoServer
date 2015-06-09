@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<Configuration pixelQuantity='8' installationName='Celebra'>
+	<Devices>
+		<Device id='1' name='Celebra' type='mBed' ipAddress='192.168.2.10'
+			UDPPort='6454' enabled='1' />
+	</Devices>
+	<Meshes>
+        <Mesh name='sphere' path='meshes/sphere.obj' />
+		<Mesh name='cylinderShort' path='meshes/cylinderShort100.obj' />
+		<Mesh name='cylinderLong' path='meshes/cylinderLong100.obj' />
+	</Meshes>
+    <LedTypes>
+        <LedType id="0">
+            <ColorPair r0="255" g0="0" b0="0" r1="255" g1="0" b1="0"/>
+            <ColorPair r0="0" g0="255" b0="0" r1="0" g1="255" b1="0"/>
+            <ColorPair r0="0" g0="0" b0="255" r1="0" g1="0" b1="255"/>
+        </LedType>
+        <LedType id="1">
+            <ColorPair r0="255" g0="0" b0="0" r1="255" g1="0" b1="0"/>
+            <ColorPair r0="0" g0="255" b0="0" r1="0" g1="255" b1="0"/>
+            <ColorPair r0="0" g0="0" b0="255" r1="0" g1="0" b1="255"/>
+        </LedType>
+    </LedTypes>
+	<FrameConf>
+        
+        <Pixel id='0' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='-17' y='0' z='51' />
+			</Render>
+		</Pixel>
+        
+        <Pixel id='1' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='17' y='0' z='51' />
+			</Render>
+		</Pixel>
+        
+        <Pixel id='2' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='51' y='0' z='17' />
+			</Render>
+		</Pixel>
+        
+        <Pixel id='3' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='51' y='0' z='-17' />
+			</Render>
+		</Pixel>
+        
+        <Pixel id='4' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='17' y='0' z='-51' />
+			</Render>
+		</Pixel>
+        
+        <Pixel id='5' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='-17' y='0' z='-51' />
+			</Render>
+		</Pixel>
+        
+        <Pixel id='6' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='-51' y='0' z='-17' />
+			</Render>
+		</Pixel>
+        <Pixel id='7' r='0' g='0' b='0' a='255' device='1'>
+			<Render mesh='cylinderLong'>
+                <Front x='0' y='1' z='0' />
+                <Up x='0' y='0' z='0' />
+                <Position x='-51' y='0' z='17' />
+			</Render>
+		</Pixel>
+       
+	</FrameConf>
+	<ClientsProxys>
+        <Client TCPPort='5002' UDPPort='5003' id='1' name='TDI'
+        enabled='0' blendFactor='0.2' protocolType='0' />
+	
+        <!--	<Client TCPPort='6006' UDPPort='6007' id='3' name='Kinect'
+         enabled='0' blendFactor='0.2' protocolType='0' />-->
+		<!--<Client TCPPort='6020' UDPPort='6030' id='2' name='Perlin' enabled='1' 
+			blendFactor='0.1' protocolType='1'/> 
+		<Client TCPPort='6020' UDPPort='6030' id='2' name='Video2'
+			enabled='1' blendFactor='0.1' protocolType='0' />-->
+        
+		<!--<Client TCPPort='6022' UDPPort='6024' id='4' name='Kinect'
+			enabled='0' blendFactor='0.2' protocolType='0' />-->
+	</ClientsProxys>
+    <!--<MulticastConfig UDPPort='6061' groupAddress='224.0.0.13'
+    broadcastEnabled='0' ipAddress='10.0.0.18' />-->
+	<MulticastConfig UDPPort='60001' groupAddress='224.0.0.13'
+		broadcastEnabled='0' ipAddress='ec2-54-213-36-168.us-west-2.compute.amazonaws.com' />
+</Configuration>

@@ -1,0 +1,668 @@
+<?xml version="1.0" ?>
+<Configuration pixelQuantity='80' installationName='Celebra'>
+	<Devices>
+		<Device id='1' name='Celebra' type='mBed' ipAddress='192.168.2.10'
+			UDPPort='6454' enabled='1' />
+	</Devices>
+	<Meshes>
+        <Mesh name='sphere' path='meshes/sphere.obj' />
+		<Mesh name='cylinderShort' path='meshes/cylinderShort100.obj' />
+		<Mesh name='cylinderLong' path='meshes/cylinderLong100.obj' />
+	</Meshes>
+    <LedTypes>
+        <LedType id="0">
+            <ColorPair r0="255" g0="0" b0="0" r1="255" g1="0" b1="0"/>
+            <ColorPair r0="0" g0="255" b0="0" r1="0" g1="255" b1="0"/>
+            <ColorPair r0="0" g0="0" b0="255" r1="0" g1="0" b1="255"/>
+        </LedType>
+        <LedType id="1">
+            <ColorPair r0="255" g0="0" b0="0" r1="255" g1="0" b1="0"/>
+            <ColorPair r0="0" g0="255" b0="0" r1="0" g1="255" b1="0"/>
+            <ColorPair r0="0" g0="0" b0="255" r1="0" g1="0" b1="255"/>
+        </LedType>
+    </LedTypes>
+	<FrameConf>
+        
+        <!-- octobar 1    6.5 , 1 -->
+        <Pixel id='0' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.5' y='1' z='2' />
+			</Render>
+		</Pixel> 
+        
+		<Pixel id='1' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.4' y='0.5' z='2.2' />
+			</Render>
+		</Pixel>
+		<Pixel id='2' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.7' y='2.0' z='2.2' />
+			</Render>
+		</Pixel>
+		<Pixel id='3' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.8' y='0.5' z='2.1' />
+			</Render>
+		</Pixel>
+		<Pixel id='4' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.1' y='2.0' z='2.50' />
+			</Render>
+		</Pixel>
+		<Pixel id='5' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.93' y='0.8' z='2.70' />
+			</Render>
+		</Pixel>
+		<Pixel id='6' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.9' y='1.1' z='2.2' />
+			</Render>
+		</Pixel>
+		<Pixel id='7' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.2' y='1.97' z='2.8855' />
+			</Render>
+		</Pixel>
+        
+        <!-- octobar 2    2 , 1   -->
+        
+		<Pixel id='8' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.42' y='1.1' z='2.569' />
+			</Render>
+		</Pixel>
+       
+		<Pixel id='9' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2' y='0.5' z='1.7' />
+			</Render>
+		</Pixel>
+		<Pixel id='10' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.7' y='0.5' z='1.8' />
+			</Render>
+		</Pixel>
+		<Pixel id='11' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='1.7' y='1.1' z='2.8855' />
+			</Render>
+		</Pixel>
+		<Pixel id='12' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='1.472' y='2.2' z='1.2' />
+			</Render>
+		</Pixel>
+		<Pixel id='13' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='1.026' y='1.0' z='2.6605' />
+			</Render>
+		</Pixel>
+		<Pixel id='14' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.172' y='1.397' z='2.569' />
+			</Render>
+		</Pixel>
+		<Pixel id='15' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.648' y='0.397' z='2.8855' />
+			</Render>
+		</Pixel>
+        
+        <!-- octobar 3   3 , 3-->
+        
+		<Pixel id='16' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.569' y='3.172' z='1.397' />
+			</Render>
+		</Pixel>
+        
+         
+		<Pixel id='17' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.423' y='2.775' z='3.4885' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='18' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.5' y='2.0' z='1.0' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='19' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.423' y='2.775' z='3.4885' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='20' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.569' y='4.172' z='2.397' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='21' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.648' y='2.397' z='2.8855' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='22' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.172' y='2.397' z='1.569' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='23' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.026' y='3.3' z='4.6605' />
+			</Render>
+		</Pixel>
+        
+        <!-- octobar 4   6 , 2  -->
+		<Pixel id='24' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.172' y='2.397' z='1.569' />
+			</Render>
+		</Pixel>
+
+		<Pixel id='25' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.648' y='1.397' z='2.8855' />
+			</Render>
+		</Pixel>
+		<Pixel id='26' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.569' y='3.172' z='1.397' />
+			</Render>
+		</Pixel>
+		<Pixel id='27' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='7.423' y='2.775' z='3.4885' />
+			</Render>
+		</Pixel>
+		<Pixel id='28' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.0423' y='2.1775' z='1.34885' />
+			</Render>
+		</Pixel>
+		<Pixel id='29' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.569' y='2.172' z='1.397' />
+			</Render>
+		</Pixel>
+		<Pixel id='30' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.648' y='1.397' z='2.8855' />
+			</Render>
+		</Pixel>
+		<Pixel id='31' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.569' y='1.172' z='1.397' />
+			</Render>
+		</Pixel>
+        
+        <!-- octobar 5 5 , 3.5 -->
+        
+		<Pixel id='32' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.423' y='3.775' z='1.4885' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='33' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.423' y='2.775' z='2.4885' />
+			</Render>
+		</Pixel>
+		<Pixel id='34' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.769' y='2.172' z='1.397' />
+			</Render>
+		</Pixel>
+		<Pixel id='35' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.648' y='2.397' z='2.8855' />
+			</Render>
+		</Pixel>
+		<Pixel id='36' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.172' y='4.397' z='1.569' />
+			</Render>
+		</Pixel>
+		<Pixel id='37' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.026' y='3.140' z='2.6605' />
+			</Render>
+		</Pixel>
+		<Pixel id='38' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.172' y='3.397' z='2.569' />
+			</Render>
+		</Pixel>
+		<Pixel id='39' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.8855' y='4.648' z='1.397' />
+			</Render>
+		</Pixel>
+        
+        
+        <!-- octobar 6   5 , -4  -->
+        
+        
+		<Pixel id='40' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='8.397' y='3.569' z='1.172' />
+			</Render>
+		</Pixel>
+        
+
+		<Pixel id='41' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.4885' y='4.423' z='1.775' />
+			</Render>
+		</Pixel>
+		<Pixel id='42' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6' y='3.344' z='1.0' />
+			</Render>
+		</Pixel>
+		<Pixel id='43' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='7.4885' y='1.423' z='2.775' />
+			</Render>
+		</Pixel>
+		<Pixel id='44' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='7.397' y='5.569' z='2.3' />
+			</Render>
+		</Pixel>
+		<Pixel id='45' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='9.8855' y='5.648' z='1.397' />
+			</Render>
+		</Pixel>
+		<Pixel id='46' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.6605' y='4.026' z='1.0' />
+			</Render>
+		</Pixel>
+		<Pixel id='47' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.8855' y='4' z='1.397' />
+			</Render>
+		</Pixel>
+        
+        
+        <!-- octobar 7  2, 6.5 -->
+        
+		<Pixel id='48' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.6605' y='6.026' z='1.3' />
+			</Render>
+		</Pixel>
+
+		<Pixel id='49' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.8855' y='5.648' z='3.397' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='50' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='1.397' y='5.569' z='1.172' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='51' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.4885' y='4.423' z='1.775' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='52' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.6' y='5.90' z='1.90' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='53' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.4885' y='5.423' z='1.775' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='54' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.397' y='6.569' z='1.172' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='55' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.8855' y='5.648' z='1.397' />
+			</Render>
+		</Pixel>
+        
+        <!-- octobar 8     3.5 , 7  -->
+        
+		<Pixel id='56' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.6605' y='7.026' z='2.0' />
+			</Render>
+		</Pixel>
+
+		<Pixel id='57' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.8855' y='6.648' z='2.397' />
+			</Render>
+		</Pixel>
+		<Pixel id='58' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='1.9397' y='6.569' z='1.172' />
+			</Render>
+		</Pixel>
+		<Pixel id='59' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.0' y='5.423' z='1.775' />
+			</Render>
+		</Pixel>
+		<Pixel id='60' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.4885' y='6.423' z='1.775' />
+			</Render>
+		</Pixel>
+		<Pixel id='61' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.397' y='5.569' z='1.172' />
+			</Render>
+		</Pixel>
+		<Pixel id='62' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.8855' y='4.648' z='1.397' />
+			</Render>
+		</Pixel>
+		<Pixel id='63' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='2.397' y='8.09' z='1.172' />
+			</Render>
+		</Pixel>
+        
+        <!-- octobar 9   6 , 6.5   -->
+        
+		<Pixel id='64' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.4885' y='7.423' z='1.7' />
+			</Render>
+		</Pixel>
+
+		<Pixel id='65' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.4885' y='5.423' z='2.75' />
+			</Render>
+		</Pixel>
+		<Pixel id='66' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.9397' y='7.0569' z='1.1172' />
+			</Render>
+		</Pixel>
+		<Pixel id='67' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.8855' y='5.648' z='1.397' />
+			</Render>
+		</Pixel>
+		<Pixel id='68' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.6605' y='7.026' z='1.0' />
+			</Render>
+		</Pixel>
+		<Pixel id='69' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.397' y='4.8855' z='1.648' />
+			</Render>
+		</Pixel>
+		<Pixel id='70' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.775' y='8.4885' z='1.423' />
+			</Render>
+		</Pixel>
+		<Pixel id='71' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5' y='7.5' z='1.344' />
+			</Render>
+		</Pixel>
+        
+        <!-- octobar 10  5 , 5  -->
+        
+		<Pixel id='72' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.775' y='5.4885' z='1.423' />
+			</Render>
+		</Pixel>
+
+		<Pixel id='73' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.397' y='5.8855' z='1.648' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='74' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='3.50' y='6.6605' z='1.026' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='75' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='4.397' y='7.8855' z='1.648' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='76' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='7.30' y='4.6605' z='1.026' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='77' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='5.397' y='6.8855' z='2.648' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='78' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.775' y='5.4885' z='1.423' />
+			</Render>
+		</Pixel>
+        
+		<Pixel id='79' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='sphere'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='6.0' y='7.80' z='1.344' />
+			</Render>
+		</Pixel>
+       
+	</FrameConf>
+	<ClientsProxys>
+        <Client TCPPort='5002' UDPPort='5003' id='1' name='Sound'
+        enabled='0' blendFactor='0.2' protocolType='0' />
+        <Client TCPPort='6010' UDPPort='6011' id='2' name='Video'
+        enabled='0' blendFactor='0.2' protocolType='0' />
+		<Client TCPPort='6006' UDPPort='6007' id='3' name='Kinect'
+        enabled='0' blendFactor='0.2' protocolType='0' />
+        <!---->
+		<!--<Client TCPPort='6020' UDPPort='6030' id='2' name='Perlin' enabled='1' 
+			blendFactor='0.1' protocolType='1'/> 
+		<Client TCPPort='6020' UDPPort='6030' id='2' name='Video2'
+			enabled='1' blendFactor='0.1' protocolType='0' />-->
+        
+		<!--<Client TCPPort='6022' UDPPort='6024' id='4' name='Kinect'
+			enabled='0' blendFactor='0.2' protocolType='0' />-->
+	</ClientsProxys>
+    <!--<MulticastConfig UDPPort='6061' groupAddress='224.0.0.13'
+    broadcastEnabled='0' ipAddress='10.0.0.18' />-->
+	<MulticastConfig UDPPort='60001' groupAddress='224.0.0.13'
+		broadcastEnabled='0' ipAddress='ec2-54-213-36-168.us-west-2.compute.amazonaws.com' />
+</Configuration>
