@@ -5,6 +5,7 @@
 .metadata
 .gradle
 bin/senderoServer_debug
+obj/
 tmp/
 *.tmp
 *.bak
