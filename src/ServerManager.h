@@ -3,6 +3,23 @@
 #ifndef Server_Manager
 #define Server_Manager
 
+
+#include "../include/sio_client.h"
+
+#include <functional>
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <string>
+#include <stdio.h>
+#include <fstream>
+
+using namespace sio;
+using namespace std;
+
+
+
 #include "ofMain.h"
 #include <string.h>
 #include <map>
@@ -32,6 +49,7 @@ class ServerClientProxy;
 class ServerManager : public ofBaseApp
 {
 private:
+	sio::client h;
     int pixelQuantity;
     string installationName;
     bool enableDraw;

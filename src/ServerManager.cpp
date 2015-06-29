@@ -685,7 +685,7 @@ int ServerManager::loadFromFile()
 
 void ServerManager::setup()
 {
-    
+
     this->clients = new map<int,ServerClientProxy*>;
     this->clientsFast = new vector<ServerClientProxy*>;
 	this->MCManager= new MultiCastManager();
@@ -965,6 +965,26 @@ void ServerManager::update()
         //transmito frame resultante por multicast, mediante el thread de comunicacion multicast
         this->sendFrameToMulticastChannel(transmitFrame);   
         
+        /*
+         *  SOCKET.IO PROTOTYPE
+        */
+        static bool booleanini = true;
+        if (booleanini) {
+        	h.connect("http://localhost:8080");
+        	h.socket()->emit("connection");
+        }
+        uint8_t* raw_frame = transmitFrame->getRawFrameData();
+		int raw_frame_length = transmitFrame->getPixelQuantity()*3;
+
+		h.socket()->emit("file_upload", std::make_shared<std::string>((char *)raw_frame, raw_frame_length));
+
+		//h.sync_close();
+		//h.clear_con_listeners();
+
+        /*
+         * END PROTOTYPE
+         */
+
         //se transmite el output midi.
         if (midiEnabled){
             DTFrame* transmitFrameMidi = this->buildFrameToTransmit();
