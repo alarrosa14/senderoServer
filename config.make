@@ -104,7 +104,7 @@ PROJECT_LDFLAGS= -llapack -lblas
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-PROJECT_CFLAGS = -lm -lg2c 
+# PROJECT_CFLAGS = 
 
 ################################################################################
 # PROJECT OPTIMIZATION CFLAGS
