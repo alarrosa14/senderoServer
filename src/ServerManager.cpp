@@ -970,6 +970,7 @@ void ServerManager::update()
         */
         static bool booleanini = true;
         if (booleanini) {
+        	booleanini = false;
         	h.connect("http://localhost:8080");
         	h.socket()->emit("connection");
         }
