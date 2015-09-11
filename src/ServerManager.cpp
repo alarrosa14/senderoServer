@@ -68,10 +68,18 @@ int ServerManager::loadFromFile()
 			return -1;
 		}
 		
+		/*
 		TiXmlElement* multicastConfig= myClientProxys->NextSiblingElement();
 		if (!multicastConfig){
 			return -1;
 		}
+		*/
+		TiXmlElement* streamServerConfig= myClientProxys->NextSiblingElement();
+        cout << "El stream server config: " << streamServerConfig << endl;
+		if (!streamServerConfig){
+			return -1;
+		}
+
 		//configuracion de instalacion
 		string instName = "installationName";
 		if(myServer->Attribute(instName.c_str())){
@@ -645,7 +653,7 @@ int ServerManager::loadFromFile()
 		}		
 
 		//configuracion de MulticastManager
-
+		/*
 		string enabledMCName="broadcastEnabled";
 		if (multicastConfig->Attribute(enabledMCName.c_str())){
 			this->MCManager->setBroadcastState(ofToInt(multicastConfig->Attribute("broadcastEnabled")));
@@ -677,6 +685,32 @@ int ServerManager::loadFromFile()
 		else{
 			return -1;
 		}
+		*/
+
+		string enabledName="enabled";
+		if (streamServerConfig->Attribute(enabledName.c_str())){
+			this->SSManager->setEnabled(ofToInt(streamServerConfig->Attribute("enabled")));
+		}
+		else{
+			return -1;
+		}
+
+		string addressName = "ipAddress";
+		if (streamServerConfig->Attribute(addressName.c_str())){
+			this->SSManager->setAddress(streamServerConfig->Attribute("ipAddress"));
+		}
+		else{
+			return -1;
+		}
+
+		string portName = "port";
+		if (streamServerConfig->Attribute(portName.c_str())){
+			this->SSManager->setPort(ofToInt(streamServerConfig->Attribute("port")));
+		}
+		else{
+			return -1;
+		}
+
 	}else{
 		//error
 		return -1;
@@ -688,7 +722,8 @@ void ServerManager::setup()
 
     this->clients = new map<int,ServerClientProxy*>;
     this->clientsFast = new vector<ServerClientProxy*>;
-	this->MCManager= new MultiCastManager();
+	// this->MCManager= new MultiCastManager();
+    this->SSManager= new StreamServerManager();
     this->DVCManager= new DeviceManager();
 	this->pixelQuantity=0;
 	this->pixels= new map<int,Pixel*>;
@@ -767,7 +802,8 @@ void ServerManager::setup()
     //devices
     this->DVCManager->setup();
 	//multicast manager
-	this->MCManager->setupMulticastSender();
+	//this->MCManager->setupMulticastSender();
+    this->SSManager->setupStreamingSender();
     
     //create displaylist for spheres
     this->displayList = glGenLists(1);
@@ -788,7 +824,8 @@ void ServerManager::setup()
     gpuManager= new GPUManager(this->pixelQuantity);
     
     //
-    this->MCManager->startThread(true);
+    //this->MCManager->startThread(true);
+    this->SSManager->startThread(true);
     this->DVCManager->startThread(true);
     this->midiOutController->startThread(true);
     vector<ServerClientProxy*>::iterator itClients;
@@ -963,11 +1000,10 @@ void ServerManager::update()
         
         DTFrame* transmitFrame = this->buildFrameToTransmit();
         //transmito frame resultante por multicast, mediante el thread de comunicacion multicast
-        this->sendFrameToMulticastChannel(transmitFrame);   
+        this->sendFrameToStreamingServer(transmitFrame);   
         
         /*
          *  SOCKET.IO PROTOTYPE
-        */
         static bool booleanini = true;
         if (booleanini) {
         	booleanini = false;
@@ -1098,7 +1134,7 @@ void ServerManager::setClientState(int clientID, bool newState)
 
 void ServerManager::setMulticastChannelState(bool newState)
 {
-	this->MCManager->setBroadcastState(newState);
+	//this->MCManager->setBroadcastState(newState);
 }
 
 void ServerManager::blendFromFrame(DTFrame* newFrame, float blendFactor)
@@ -1129,10 +1165,15 @@ void ServerManager::blendFromFrame(DTFrame* newFrame, float blendFactor)
 	}
 }
 
-void ServerManager::sendFrameToMulticastChannel(DTFrame* transmitFrame)
+/* void ServerManager::sendFrameToMulticastChannel(DTFrame* transmitFrame)
 {
     this->MCManager->addFrameToSendBuffer(transmitFrame);
+}*/
+void ServerManager::sendFrameToStreamingServer(DTFrame* transmitFrame)
+{
+    this->SSManager->addFrameToSendBuffer(transmitFrame);
 }
+
 
 DTFrame* ServerManager::buildFrameToTransmit()
 {
@@ -1205,7 +1246,8 @@ void ServerManager::loadClientPixels()
 }
 
 void ServerManager::exit(){
-    this->MCManager->stopThread();
+    ////this->MCManager->stopThread();
+    this->SSManager->stopThread();
     this->DVCManager->stopThread();
     this->midiOutController->stopThread();
     
@@ -1366,7 +1408,7 @@ void ServerManager::guiEvent(ofxUIEventArgs &e){
     else if (name=="mc_channelEnabled"){
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
 		bool newVal = toggle->getValue(); 
-        this->MCManager->setBroadcastState(newVal);
+        //this->MCManager->setBroadcastState(newVal);
     }else if (name=="midi_enabled"){
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget; 
 		bool newVal = toggle->getValue(); 

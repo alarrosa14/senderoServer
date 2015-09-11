@@ -75,7 +75,7 @@
 	</FrameConf>
 	<ClientsProxys>
         <Client TCPPort='5002' UDPPort='5003' id='1' name='Sound'
-        enabled='0' blendFactor='0.2' protocolType='0' />
+        enabled='1' blendFactor='0.9' protocolType='0' />
         <Client TCPPort='6010' UDPPort='6011' id='2' name='Video'
         enabled='0' blendFactor='0.2' protocolType='0' />
 		<!--<Client TCPPort='6006' UDPPort='6007' id='3' name='Kinect'
@@ -91,6 +91,8 @@
 		<!--<Client TCPPort='6022' UDPPort='6024' id='4' name='Kinect'
 			enabled='0' blendFactor='0.2' protocolType='0' />-->
 	</ClientsProxys>
-	<MulticastConfig UDPPort='60000' groupAddress='226.0.33.13'
-		broadcastEnabled='0' ipAddress='190.132.32.13' />
+	<!-- MulticastConfig UDPPort='60000' groupAddress='226.0.33.13'
+		broadcastEnabled='0' ipAddress='190.132.32.13' / -->
+		
+    <StreamServerConfig enabled='1' ipAddress='localhost' port='8080' />
 </Configuration>

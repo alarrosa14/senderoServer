@@ -154,10 +154,11 @@ void ServerClientProxy::listenTCP(){
 
 			ofxXmlSettings XML;
 			XML.loadFromBuffer(message);
-			
+
             TiXmlElement* myMessage=XML.doc.RootElement();
             if (myMessage){
                 if (myMessage->ValueStr() == "ConfigurationRequest" ){
+                	ofLogNotice("Configuration request received");
                     DTFrame* confFrame = this->buildFrameToTransmit();
                     if (confFrame!=0) {
                         string confMessage = confFrame->toXML();

@@ -4,7 +4,7 @@
 #define Server_Manager
 
 
-#include "../include/sio_client.h"
+//#include "../include/sio_client.h"
 
 #include <functional>
 #include <iostream>
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <fstream>
 
-using namespace sio;
+//using namespace sio;
 using namespace std;
 
 
@@ -26,7 +26,7 @@ using namespace std;
 #include <vector>
 #include "MbedComm.h"
 #include "Pixel.h"
-#include "MultiCastManager.h"
+#include "StreamServerManager.h"
 #include "ServerClientProxy.h"
 #include "ofxXmlSettings.h"
 #include "DTClient.h"
@@ -49,7 +49,7 @@ class ServerClientProxy;
 class ServerManager : public ofBaseApp
 {
 private:
-	sio::client h;
+	// sio::client h;
     int pixelQuantity;
     string installationName;
     bool enableDraw;
@@ -91,7 +91,8 @@ private:
     ofTrueTypeFont myfont;
     ofImage logo;
     
-    MultiCastManager* MCManager;
+    //MultiCastManager* MCManager;
+    StreamServerManager* SSManager;
     DeviceManager* DVCManager;
     
     //UI collections.
@@ -112,7 +113,7 @@ private:
     
 	int loadFromFile();
 	void blendFromFrame(DTFrame* newFrame, float blendFactor);
-	void sendFrameToMulticastChannel(DTFrame* transmitFrame);
+	void sendFrameToStreamingServer(DTFrame* transmitFrame);
 	void sendFrameToDevices();
 	void setDrawingState(bool newState);
 	void decay(int r, int g, int b, int a);
