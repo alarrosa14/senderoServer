@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <Configuration pixelQuantity='91' installationName='Pentakis'>
 	<Devices>
-		<Device id='1' name='Pentakis' type='mBed' ipAddress='192.168.2.10'
-			UDPPort='6454' enabled='1' />
+		<Device id='1' name='Pentakis' type='mBed' ipAddress='localhost'
+			UDPPort='7777' enabled='1' />
 	</Devices>
 	<Meshes>
 		<Mesh name='cylinderShort' path='meshes/cylinderShort100.obj' />

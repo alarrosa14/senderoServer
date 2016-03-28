@@ -40,6 +40,7 @@ private:
     vector<DTFrame*> sendBuffer;
     map<int,LEDType*> ledTypes;
     void sendFrameToDevices(DTFrame* frame);
+    ofMutex waitForNewFrameMutex;
     
     
 };

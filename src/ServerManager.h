@@ -42,11 +42,12 @@ using namespace std;
 #include "ofVboMesh.h"
 #include "MidiController.h"
 #include "CalibratorUI.h"
+#include "Worker.h"
 
 
 class ServerClientProxy;
 
-class ServerManager : public ofBaseApp
+class ServerManager : public ofBaseApp, public WorkerDelegate
 {
 private:
 	// sio::client h;
@@ -91,10 +92,12 @@ private:
     ofTrueTypeFont myfont;
     ofImage logo;
     
-    //MultiCastManager* MCManager;
     StreamServerManager* SSManager;
     DeviceManager* DVCManager;
-    
+
+    /* Client frames processing and blending */
+    Worker* worker;
+
     //UI collections.
     map<int, ClientUI*>* clientsParams;
     map<int,DeviceUI*>* devicesParams;
@@ -151,7 +154,8 @@ public:
     bool showGUI;
     bool drawAxis;
     
-    
+    /* Worker Delegate */
+    virtual void workerLoop();
     
 };
 
