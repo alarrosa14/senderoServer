@@ -10,7 +10,7 @@
 
 
 DeviceManager::DeviceManager(){
-    
+    waitForNewFrameMutex.lock();
 }
 
 DeviceManager::~DeviceManager(void){
@@ -27,11 +27,15 @@ void DeviceManager::addFrameToControllersBuffer(DTFrame* newFrame){
     this->sendBuffer.push_back(newFrame);
     
     unlock();
+
+    waitForNewFrameMutex.unlock();
 }
 
 void DeviceManager::threadedFunction(){
     
     while(isThreadRunning()) {
+        
+        waitForNewFrameMutex.lock();
         DTFrame* frame=0;
         lock();
         if(this->sendBuffer.size()>0){
@@ -45,7 +49,6 @@ void DeviceManager::threadedFunction(){
             this->sendFrameToDevices(frame);
             delete frame;
         }
-        sleep(25);
     }
     
 }

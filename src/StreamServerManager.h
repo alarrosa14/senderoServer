@@ -44,4 +44,5 @@ private:
 	bool enabled;
 	int port;
 	string address;
+	ofMutex waitForNewFrameMutex;
 };

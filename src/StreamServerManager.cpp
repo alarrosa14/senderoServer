@@ -7,7 +7,9 @@
 
 #include "StreamServerManager.h"
 
-StreamServerManager::StreamServerManager(void) {}
+StreamServerManager::StreamServerManager(void) {
+	waitForNewFrameMutex.lock();
+}
 
 StreamServerManager::~StreamServerManager(void) {}
 
@@ -47,20 +49,24 @@ void StreamServerManager::addFrameToSendBuffer(DTFrame* newFrame) {
 	lock();
 	this->sendBuffer.push_back(newFrame);
 	unlock();
+	waitForNewFrameMutex.unlock();
 }
 
 void StreamServerManager::threadedFunction() {
 	while(isThreadRunning()) {
-	lock();
+		waitForNewFrameMutex.lock();
+		lock();
 		if(this->sendBuffer.size()>0){
 	        vector<DTFrame*>::iterator it = this->sendBuffer.begin();
 	        this->sendBuffer.erase(it);
+	        unlock();
 
 	        uint8_t* raw_frame = (*it)->getRawFrameData();
 			int raw_frame_length = (*it)->getPixelQuantity()*3;
 
 			this->socketIOClient.socket()->emit("sendFrame", std::make_shared<std::string>((char *)raw_frame, raw_frame_length));
+	    } else {
+	    	unlock();
 	    }
-	unlock();
 	}
 }

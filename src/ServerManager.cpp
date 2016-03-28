@@ -719,12 +719,13 @@ int ServerManager::loadFromFile()
 
 void ServerManager::setup()
 {
-
     this->clients = new map<int,ServerClientProxy*>;
     this->clientsFast = new vector<ServerClientProxy*>;
 	// this->MCManager= new MultiCastManager();
     this->SSManager= new StreamServerManager();
     this->DVCManager= new DeviceManager();
+    this->worker = new Worker(this, 20);
+
 	this->pixelQuantity=0;
 	this->pixels= new map<int,Pixel*>;
     this->pixelsFast=new vector<Pixel*>;
@@ -754,7 +755,10 @@ void ServerManager::setup()
     
 	this->elapsedTicks=0;
 	this->ticks=0;
-	this->frameRateInterval=1.0f/30.0f * 1000.0f;//41.7; //24 fps
+
+    double framesPerSecond = 30;
+    ofSetFrameRate(framesPerSecond);
+	this->frameRateInterval = 1.0f / framesPerSecond * 1000.0f;
     
     this->drawTicks=0;
     this->drawElapsedTicks=0;
@@ -801,6 +805,7 @@ void ServerManager::setup()
     
     //devices
     this->DVCManager->setup();
+    this->worker->setup();
 	//multicast manager
 	//this->MCManager->setupMulticastSender();
     this->SSManager->setupStreamingSender();
@@ -836,45 +841,43 @@ void ServerManager::setup()
         client->startThread(true);
 		itClients++;
 	}
-    
 
-
-    
+    this->worker->startThread();   
 }
 
-void ServerManager::update()
-{
-	//obtengo frames de cada cliente y los blendeo
+void ServerManager::workerLoop(){
     
-	this->ticks = ofGetElapsedTimeMillis();
-    this->FRTicks = this->ticks;
-    float ticksInterval = this->FRTicks - this->FRElapsedTicks;
-    this->realFrameRate = 1000.0f/ticksInterval;
-    this->FRElapsedTicks = this->FRTicks;
+    worker->lock();
+    bool _flash = flash;
+    worker->unlock();
+
+    if (_flash){
+
+        worker->lock();
+        DTFrame* flashFrame = this->buildFrameToTransmit();
+        worker->unlock();
+
+        vector<DTPixel*>* pixels = flashFrame->getPixels();
+        vector<DTPixel*>::iterator it = pixels->begin();
+        while (it != pixels->end())
+        {
+            DTPixel* newPixel=*it;
+            newPixel->setR(flashR);
+            newPixel->setG(flashG);
+            newPixel->setB(flashB);
+            newPixel->setA(255);
+
+            it++;
+        }
+
+        worker->lock();
+        this->blendFromFrame(flashFrame,1.0f);
+        worker->unlock();
+
+        delete flashFrame;
+
+    } else {
     
-    this->drawTicks=this->ticks;
-    if((drawTicks-drawElapsedTicks)>drawTicksToReach){
-        this->drawElapsedTicks=this->drawTicks;
-        this->doDraw=true;
-    }
-    
-    if (this->averageQty>0){
-        this->sumFrameRate += this->realFrameRate;
-        this->averageQty-=1;
-    }
-    else {
-        this->averageQty=200;
-        this->averageFrameRate = this->sumFrameRate / 200.0f;
-        this->sumFrameRate=0;
-    }
-        
-	bool transmit = false;
-	if ((this->ticks - this->elapsedTicks)>this->frameRateInterval){
-		this->elapsedTicks = this->ticks;
-		transmit=true;
-	}
-    
-	if (!flash){
         vector<ServerClientProxy*>::iterator it;
         it=this->clientsFast->begin();
         vector<cl_float*>* framesToBlend = new vector<cl_float*>;
@@ -935,7 +938,7 @@ void ServerManager::update()
 
             it++;
         }
-        
+
         /////// perform calculations on GPU
         /////// TO_DO change to CPU calculation
         
@@ -960,7 +963,9 @@ void ServerManager::update()
         delete availableFrames;
         delete usedDTFrames;
         delete blendFactors;
-        
+
+        worker->lock();
+
         for(int p=0; p<this->pixelQuantity; p++){
             Pixel* myPixel= this->pixelsFast->operator[](p);
             float r = this->pixelArray[p*4];
@@ -972,65 +977,49 @@ void ServerManager::update()
             myPixel->g=g;
             myPixel->b=b;
             myPixel->a=a;
-
         }
-	}
-	else{
-		DTFrame* flashFrame = this->buildFrameToTransmit();
-		vector<DTPixel*>* pixels = flashFrame->getPixels();
-		vector<DTPixel*>::iterator it = pixels->begin();
-		while (it != pixels->end())
-		{
-			DTPixel* newPixel=*it;
-			newPixel->setR(flashR);
-			newPixel->setG(flashG);
-			newPixel->setB(flashB);
-			newPixel->setA(255);
 
-			it++;
-		}
-		this->blendFromFrame(flashFrame,1.0f);
-        delete flashFrame;
-	}
-	if (transmit || flash){
-        
-        //se encola el frame para que sea procesado por el thread de envio a devices.
-        DTFrame* transmitFrameDevices = this->buildFrameToTransmit();
-        this->DVCManager->addFrameToControllersBuffer(transmitFrameDevices);
-        
-        DTFrame* transmitFrame = this->buildFrameToTransmit();
-        //transmito frame resultante por multicast, mediante el thread de comunicacion multicast
-        this->sendFrameToStreamingServer(transmitFrame);   
-        
-        /*
-         *  SOCKET.IO PROTOTYPE
-        static bool booleanini = true;
-        if (booleanini) {
-        	booleanini = false;
-        	h.connect("http://localhost:8080");
-        	h.socket()->emit("connection");
-        }
-        uint8_t* raw_frame = transmitFrame->getRawFrameData();
-		int raw_frame_length = transmitFrame->getPixelQuantity()*3;
+        worker->unlock();
+    }
 
-		h.socket()->emit("file_upload", std::make_shared<std::string>((char *)raw_frame, raw_frame_length));
+    if (_flash){
+        worker->lock();
+        flash=false;
+        worker->unlock();   
+    }
+}
 
-		//h.sync_close();
-		//h.clear_con_listeners();
+void ServerManager::update()
+{
+	
+	this->ticks = ofGetElapsedTimeMillis();
+    this->FRTicks = this->ticks;
+    float ticksInterval = this->FRTicks - this->FRElapsedTicks;
+    this->realFrameRate = 1000.0f/ticksInterval;
+    this->FRElapsedTicks = this->FRTicks;
+    
+    if (this->averageQty>0){
+        this->sumFrameRate += this->realFrameRate;
+        this->averageQty-=1;
+    }
+    else {
+        this->averageQty=200;
+        this->averageFrameRate = this->sumFrameRate / 200.0f;
+        this->sumFrameRate=0;
+    }
 
-        /*
-         * END PROTOTYPE
-         */
+    worker->lock();
+    DTFrame* transmitFrameDevices = this->buildFrameToTransmit();
+    DTFrame* transmitFrame = this->buildFrameToTransmit();
+    worker->unlock();
 
-        //se transmite el output midi.
-        if (midiEnabled){
-            DTFrame* transmitFrameMidi = this->buildFrameToTransmit();
-            this->midiOutController->addFrameToMidiBuffer(transmitFrameMidi);
-        }
-	}
-	if (flash)
-		flash=false;
-        
+    this->DVCManager->addFrameToControllersBuffer(transmitFrameDevices);
+    this->sendFrameToStreamingServer(transmitFrame);   
+    
+    if (midiEnabled){
+        DTFrame* transmitFrameMidi = this->buildFrameToTransmit();
+        this->midiOutController->addFrameToMidiBuffer(transmitFrameMidi);
+    }
 }
 
 void ServerManager::draw()
@@ -1059,6 +1048,8 @@ void ServerManager::draw()
             //ofScale(5,5,5);
             float width = (float) ofGetWidth();
             float height = (float) ofGetHeight();
+
+            worker->lock();
             vector<Pixel*>::iterator it = this->pixelsFast->begin();
             while (it!=this->pixelsFast->end())
             {
@@ -1066,6 +1057,7 @@ void ServerManager::draw()
                 px->draw();
                 it++;
             }
+            worker->unlock();
             glPopMatrix();
     }
     cam.end();
@@ -1199,6 +1191,7 @@ DTFrame* ServerManager::buildFrameToTransmit()
         
 		it++;
 	}
+
 	return new DTFrame(this->ticks,dtVector,newPixelArray,this->pixelQuantity,0);
 }
 
@@ -1249,6 +1242,7 @@ void ServerManager::exit(){
     ////this->MCManager->stopThread();
     this->SSManager->stopThread();
     this->DVCManager->stopThread();
+    this->worker->stopThread();
     this->midiOutController->stopThread();
     
     vector<ServerClientProxy*>::iterator itClients;
@@ -1381,7 +1375,6 @@ void ServerManager::setGUICalibration(){
 
 void ServerManager::guiEvent(ofxUIEventArgs &e){
     
-    
     string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
 
@@ -1462,7 +1455,10 @@ void ServerManager::guiEvent(ofxUIEventArgs &e){
     else if (name=="flash"){
         ofxUIButton *button = (ofxUIButton *) e.widget; 
 		bool newVal = button->getValue(); 
+        worker->lock();
         this->flash=newVal;
+        worker->unlock();
+        
     }
     else if(name=="R_CAL"){
         ofxUISlider *slider = (ofxUISlider *) e.widget; 
@@ -1558,9 +1554,4 @@ void ServerManager::guiEvent(ofxUIEventArgs &e){
     
     }
 
-    
 }
-
-
-
-
