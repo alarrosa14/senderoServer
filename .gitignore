@@ -4,7 +4,7 @@
 *.pydevproject
 .metadata
 .gradle
-bin/senderoServer_debug
+bin/
 obj/
 tmp/
 *.tmp

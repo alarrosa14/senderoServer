@@ -662,9 +662,9 @@
 	</FrameConf>
 	<ClientsProxys>
         <Client TCPPort='5002' UDPPort='5003' id='1' name='Sound'
-        enabled='1' blendFactor='0.9' protocolType='0' />
-        <Client TCPPort='6010' UDPPort='6011' id='2' name='Video'
-        enabled='0' blendFactor='0.2' protocolType='0' />
+        enabled='1' blendFactor='0.7' protocolType='0' />
+        <Client TCPPort='5004' UDPPort='5005' id='2' name='Interaction'
+        enabled='1' blendFactor='0.5' protocolType='0' />
 		<!--<Client TCPPort='6006' UDPPort='6007' id='3' name='Kinect'
         enabled='0' blendFactor='0.2' protocolType='0' />-->
 		
@@ -682,4 +682,5 @@
 		broadcastEnabled='0' ipAddress='190.132.32.13' / -->
 		
     <StreamServerConfig enabled='1' ipAddress='localhost' port='8080' />
+    
 </Configuration>
