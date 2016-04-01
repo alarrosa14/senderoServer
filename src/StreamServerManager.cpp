@@ -4,6 +4,7 @@
  *  Created on: Sep 10, 2015
  *      Author: alarrosa14
  */
+#include <chrono>
 
 #include "StreamServerManager.h"
 
@@ -52,7 +53,26 @@ void StreamServerManager::addFrameToSendBuffer(DTFrame* newFrame) {
 	waitForNewFrameMutex.unlock();
 }
 
+void convertToArrayOfBytes(void* data, int length, unsigned char *buffer) {
+	char* ptr = (char*)data;
+	for (int i = 0; i < length; i++)
+		buffer[i] = *ptr++;
+};
+
+uint64_t htonll(uint64_t n) {
+#if __BYTE_ORDER == __BIG_ENDIAN
+    return n;
+#else
+    return (((uint64_t)htonl(n)) << 32) + htonl(n >> 32);
+#endif
+}
+
+uint64_t ntohll(uint64_t n) {
+	return htonll(n);
+}
+
 void StreamServerManager::threadedFunction() {
+	unsigned char *buffer;
 	while(isThreadRunning()) {
 		waitForNewFrameMutex.lock();
 		lock();
@@ -64,8 +84,19 @@ void StreamServerManager::threadedFunction() {
 	        uint8_t* raw_frame = (*it)->getRawFrameData();
 			int raw_frame_length = (*it)->getPixelQuantity()*3;
 
-			this->socketIOClient.socket()->emit("sendFrame", std::make_shared<std::string>((char *)raw_frame, raw_frame_length));
-	    } else {
+			buffer = new unsigned char[raw_frame_length + sizeof(uint64_t)];
+
+			using namespace std::chrono;
+			uint64_t ms = htonll(duration_cast< milliseconds >(
+			    system_clock::now().time_since_epoch()
+			).count());
+
+			convertToArrayOfBytes(&ms, sizeof(ms), buffer);
+			convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + sizeof(ms));
+
+			this->socketIOClient.socket()->emit("sendFrame", std::make_shared<std::string>((char *)buffer, sizeof(ms) + raw_frame_length));
+			delete[]buffer;
+		} else {
 	    	unlock();
 	    }
 	}
