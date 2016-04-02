@@ -201,9 +201,9 @@ bool MbedComm::sendFrameFragment(){
                 bNew=255;
             
             //for Bondibar
-            packet.data[cp] = bNew;
-            packet.data[cp+1] = rNew;
-            packet.data[cp+2] = gNew;
+            packet.data[cp] = rNew;
+            packet.data[cp+1] = gNew;
+            packet.data[cp+2] = bNew;
              
             /*
             // for octobar
