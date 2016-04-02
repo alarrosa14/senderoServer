@@ -32,7 +32,7 @@ public:
 	string getAddress();
 	int getPort(); 
 
-	void setupStreamingSender();
+	void setupStreamingSender(int pixelQuantity);
 	void addFrameToSendBuffer(DTFrame* newFrame);
 	void threadedFunction();
 
@@ -42,6 +42,7 @@ private:
 	sio::client socketIOClient;
 
 	bool enabled;
+	int pixelQuantity;
 	int port;
 	string address;
 	ofMutex waitForNewFrameMutex;

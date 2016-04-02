@@ -808,7 +808,7 @@ void ServerManager::setup()
     this->worker->setup();
 	//multicast manager
 	//this->MCManager->setupMulticastSender();
-    this->SSManager->setupStreamingSender();
+    this->SSManager->setupStreamingSender(this->pixelQuantity);
     
     //create displaylist for spheres
     this->displayList = glGenLists(1);

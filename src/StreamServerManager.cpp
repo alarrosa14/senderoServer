@@ -38,10 +38,11 @@ int StreamServerManager::getPort(){
 	return this->port;
 } 
 
-void StreamServerManager::setupStreamingSender() {
+void StreamServerManager::setupStreamingSender(int pixelQuantity) {
 	cout << "Server config: " << this->address << endl << this->port << endl;
 	string url = "http://" + this->address + ":" + to_string(this->port);
 	cout << "Setting up Streaming Server: " << url << endl;
+	this->pixelQuantity = pixelQuantity;
 	this->socketIOClient.connect(url.c_str());
     this->socketIOClient.socket()->emit("connection");
 }
@@ -72,7 +73,8 @@ uint64_t ntohll(uint64_t n) {
 }
 
 void StreamServerManager::threadedFunction() {
-	unsigned char *buffer;
+	const int bufferSize = this->pixelQuantity*3 + sizeof(uint64_t);
+	unsigned char *buffer = new unsigned char[bufferSize];
 	while(isThreadRunning()) {
 		waitForNewFrameMutex.lock();
 		lock();
@@ -84,7 +86,7 @@ void StreamServerManager::threadedFunction() {
 	        uint8_t* raw_frame = (*it)->getRawFrameData();
 			int raw_frame_length = (*it)->getPixelQuantity()*3;
 
-			buffer = new unsigned char[raw_frame_length + sizeof(uint64_t)];
+			assert(raw_frame_length == this->pixelQuantity*3);
 
 			using namespace std::chrono;
 			uint64_t ms = htonll(duration_cast< milliseconds >(
@@ -94,10 +96,10 @@ void StreamServerManager::threadedFunction() {
 			convertToArrayOfBytes(&ms, sizeof(ms), buffer);
 			convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + sizeof(ms));
 
-			this->socketIOClient.socket()->emit("sendFrame", std::make_shared<std::string>((char *)buffer, sizeof(ms) + raw_frame_length));
-			delete[]buffer;
+			this->socketIOClient.socket()->emit("sendFrame", std::make_shared<std::string>((char *)buffer, bufferSize));
 		} else {
 	    	unlock();
 	    }
 	}
+	delete[]buffer;
 }
