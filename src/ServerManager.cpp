@@ -711,6 +711,16 @@ int ServerManager::loadFromFile()
 			return -1;
 		}
 
+		this->SSManager->setPixelQuantity(this->pixelQuantity);
+
+		string compression = "compression";
+		if(streamServerConfig->Attribute(compression.c_str())){
+			this->SSManager->setCompressionEnabled(ofToInt(streamServerConfig->Attribute("compression")));
+		}
+		else{
+			return -1;
+		}
+
 	}else{
 		//error
 		return -1;
@@ -808,7 +818,7 @@ void ServerManager::setup()
     this->worker->setup();
 	//multicast manager
 	//this->MCManager->setupMulticastSender();
-    this->SSManager->setupStreamingSender(this->pixelQuantity);
+    this->SSManager->setupStreamingSender();
     
     //create displaylist for spheres
     this->displayList = glGenLists(1);

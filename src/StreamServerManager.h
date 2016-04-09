@@ -26,13 +26,18 @@ public:
 	StreamServerManager();
 
 	void setEnabled(const bool &isEnabled);
+	void setCompressionEnabled(const bool &compression);
 	void setAddress(const string &address);
+	void setPixelQuantity(const int &pixelQty);
 	void setPort(const int &port);
+
 	bool getEnabled();
+	bool getCompressionEnabled();
 	string getAddress();
+	int getPixelQuantity();
 	int getPort(); 
 
-	void setupStreamingSender(int pixelQuantity);
+	void setupStreamingSender();
 	void addFrameToSendBuffer(DTFrame* newFrame);
 	void threadedFunction();
 
@@ -42,6 +47,7 @@ private:
 	sio::client socketIOClient;
 
 	bool enabled;
+	bool compressionEnabled;
 	int pixelQuantity;
 	int port;
 	string address;

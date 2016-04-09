@@ -76,7 +76,7 @@
 # add a runtime path to search for those shared libraries, since they aren't 
 # incorporated directly into the final executable application binary.
 ################################################################################
-PROJECT_LDFLAGS= -llapack -lblas -Lbin/libs -lsioclient -lboost_system -lpthread
+PROJECT_LDFLAGS= -llapack -lblas -Lbin/libs -lsioclient -lboost_system -lpthread -llz4
 
 ################################################################################
 # PROJECT DEFINES

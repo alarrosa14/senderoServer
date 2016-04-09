@@ -52,6 +52,7 @@ class ServerManager : public ofBaseApp, public WorkerDelegate
 private:
 	// sio::client h;
     int pixelQuantity;
+    bool compressionEnabled;
     string installationName;
     bool enableDraw;
     bool showFrameRate;
