@@ -63,13 +63,12 @@ void StreamServerManager::setupStreamingSender() {
 	string url = "http://" + this->address + ":" + to_string(this->port);
 	cout << "Setting up Streaming Server: " << url << endl;
 
-	if (!this->tcpClient.setup(this->address, this->port))
-		cout << "Error trying to connect to streaming server" << endl;
+	udpManager.Create();
+	cout << this->address.c_str() << this->port << endl;
+	if (!udpManager.Connect(this->address.c_str(), this->port));
+		cout << endl << endl << "Error connecting socket!" << endl << endl;
+	udpManager.SetNonBlocking(true);
 
-
-
-	// this->socketIOClient.connect(url.c_str());
-    // this->socketIOClient.socket()->emit("connection");
 }
 
 void StreamServerManager::addFrameToSendBuffer(DTFrame* newFrame) {
@@ -102,7 +101,7 @@ void StreamServerManager::threadedFunction() {
 	const int frameSize = this->pixelQuantity*3;
 
 	size_t compressedBufferMaxSize;
-	unsigned char *compressedBuffer;
+	unsigned char *compressedBuffer = NULL;
 	if (compressionEnabled) {
 		compressedBufferMaxSize = LZ4F_compressFrameBound(frameSize, NULL);
 		compressedBuffer = new unsigned char[compressedBufferMaxSize];
@@ -132,22 +131,13 @@ void StreamServerManager::threadedFunction() {
 
 			convertToArrayOfBytes(&ms, sizeof(ms), buffer);
 
-			if (tcpClient.isConnected())
-				if (compressionEnabled) {
-					size_t compressedBufferSize = LZ4F_compressFrame(compressedBuffer, compressedBufferMaxSize, raw_frame, raw_frame_length, NULL);
-					convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + sizeof(ms));
-					// this->socketIOClient.socket()->emit("sendFrame", std::make_shared<std::string>((char *)buffer, sizeof(ms) + compressedBufferSize));
-					this->tcpClient.sendRawBytes((char *)buffer, sizeof(ms) + compressedBufferSize);
-				} else {
-					convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + sizeof(ms));
-					// this->socketIOClient.socket()->emit("sendFrame", std::make_shared<std::string>((char *)buffer, bufferSize));
-					this->tcpClient.sendRawBytes((char *)buffer, bufferSize);
-				}
-			else {
-				this->tcpClient.close();
-				delete[]buffer;
-				delete[]compressedBuffer;
-				exit(1);
+			if (compressionEnabled) {
+				size_t compressedBufferSize = LZ4F_compressFrame(compressedBuffer, compressedBufferMaxSize, raw_frame, raw_frame_length, NULL);
+				convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + sizeof(ms));
+				this->udpManager.Send((char*) buffer, sizeof(ms) + compressedBufferSize);
+			} else {
+				convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + sizeof(ms));
+				this->udpManager.Send((char*) buffer, bufferSize);
 			}
 
 
@@ -155,7 +145,7 @@ void StreamServerManager::threadedFunction() {
 	    	unlock();
 	    }
 	}
-	this->tcpClient.close();
+	this->udpManager.Close();
 	delete[]buffer;
 	delete[]compressedBuffer;
 }

@@ -44,7 +44,7 @@ public:
 	virtual ~StreamServerManager();
 
 private:
-	ofxTCPClient tcpClient;
+	ofxUDPManager udpManager;
 
 	bool enabled;
 	bool compressionEnabled;
