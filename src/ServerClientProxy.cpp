@@ -35,6 +35,7 @@ ServerClientProxy::ServerClientProxy(int iTCPPort, int iUDPPort, int iId, string
 
 ServerClientProxy::~ServerClientProxy(void)
 {
+	cout << "ASLKDASKDJASDK ADJASK D" << endl;
     this->TCP.close();
     this->UDP.Close();
 	vector<Pixel*>::iterator it = this->pixelsFast.begin();
@@ -536,6 +537,7 @@ void ServerClientProxy::threadedFunction(){
         this->synchronizeSpeeds();
         sleep(25);
     }
+	TCP.close();
 }
 
 DTFrame* ServerClientProxy::buildFrameToTransmit(){

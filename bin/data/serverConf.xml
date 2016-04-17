@@ -681,6 +681,6 @@
 	<!-- MulticastConfig UDPPort='60000' groupAddress='226.0.33.13'
 		broadcastEnabled='0' ipAddress='190.132.32.13' / -->
 		
-    <StreamServerConfig enabled='1' ipAddress='localhost' port='8080' compression='1'/>
+    <StreamServerConfig enabled='1' ipAddress='alarrosa14.ddns.net' port='8080' compression='1'/>
     
 </Configuration>

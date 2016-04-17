@@ -44,7 +44,7 @@ public:
 	virtual ~StreamServerManager();
 
 private:
-	sio::client socketIOClient;
+	ofxTCPClient tcpClient;
 
 	bool enabled;
 	bool compressionEnabled;
