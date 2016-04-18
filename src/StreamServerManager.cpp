@@ -98,6 +98,8 @@ uint64_t ntohll(uint64_t n) {
 
 void StreamServerManager::threadedFunction() {
 
+	uint8_t currentSeqNmb = 0;
+
 	const int frameSize = this->pixelQuantity*3;
 
 	size_t compressedBufferMaxSize;
@@ -107,9 +109,10 @@ void StreamServerManager::threadedFunction() {
 		compressedBuffer = new unsigned char[compressedBufferMaxSize];
 	}
 
-	const int bufferSize = ((compressionEnabled && compressedBufferMaxSize > frameSize) ? compressedBufferMaxSize : frameSize) + sizeof(uint64_t);
+	const int bufferSize = ((compressionEnabled && compressedBufferMaxSize > frameSize) ? compressedBufferMaxSize : frameSize) + sizeof(uint64_t) + sizeof(uint8_t);
 	unsigned char *buffer = new unsigned char[bufferSize];
 
+	using namespace std::chrono;
 	while(isThreadRunning()) {
 
 		waitForNewFrameMutex.lock();
@@ -124,22 +127,23 @@ void StreamServerManager::threadedFunction() {
 
 			assert(raw_frame_length == this->pixelQuantity*3);
 
-			using namespace std::chrono;
 			uint64_t ms = htonll(duration_cast< milliseconds >(
 			    system_clock::now().time_since_epoch()
 			).count());
 
 			convertToArrayOfBytes(&ms, sizeof(ms), buffer);
+			convertToArrayOfBytes(&currentSeqNmb, sizeof(currentSeqNmb), buffer + sizeof(ms));
 
 			if (compressionEnabled) {
 				size_t compressedBufferSize = LZ4F_compressFrame(compressedBuffer, compressedBufferMaxSize, raw_frame, raw_frame_length, NULL);
-				convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + sizeof(ms));
-				this->udpManager.Send((char*) buffer, sizeof(ms) + compressedBufferSize);
+				convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + sizeof(ms) + sizeof(currentSeqNmb));
+				this->udpManager.Send((char*) buffer, sizeof(ms) + sizeof(currentSeqNmb) + compressedBufferSize);
 			} else {
 				convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + sizeof(ms));
 				this->udpManager.Send((char*) buffer, bufferSize);
 			}
 
+			currentSeqNmb = (currentSeqNmb + 1) % 256;
 
 		} else {
 	    	unlock();
