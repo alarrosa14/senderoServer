@@ -13,6 +13,8 @@
 
 #define PACKET_HEADER_SIZE 10
 
+#define FRAME_DATA_COMPRESSED_MASK 0x01
+
 StreamServerManager::StreamServerManager(void) {
 	waitForNewFrameMutex.lock();
 }
@@ -108,7 +110,7 @@ void StreamServerManager::threadedFunction() {
 	size_t compressedBufferMaxSize;
 	unsigned char *compressedBuffer = NULL;
 	if (compressionEnabled) {
-		flags = 0x01;
+		flags = flags | FRAME_DATA_COMPRESSED_MASK;
 		compressedBufferMaxSize = LZ4F_compressFrameBound(frameSize, NULL);
 		compressedBuffer = new unsigned char[compressedBufferMaxSize];
 	}
