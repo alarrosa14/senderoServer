@@ -11,6 +11,8 @@
 
 #include "StreamServerManager.h"
 
+#define PACKET_HEADER_SIZE 10
+
 StreamServerManager::StreamServerManager(void) {
 	waitForNewFrameMutex.lock();
 }
@@ -99,18 +101,21 @@ uint64_t ntohll(uint64_t n) {
 void StreamServerManager::threadedFunction() {
 
 	uint8_t currentSeqNmb = 0;
+	uint8_t flags = 0x00;
 
 	const int frameSize = this->pixelQuantity*3;
 
 	size_t compressedBufferMaxSize;
 	unsigned char *compressedBuffer = NULL;
 	if (compressionEnabled) {
+		flags = 0x01;
 		compressedBufferMaxSize = LZ4F_compressFrameBound(frameSize, NULL);
 		compressedBuffer = new unsigned char[compressedBufferMaxSize];
 	}
 
-	const int bufferSize = ((compressionEnabled && compressedBufferMaxSize > frameSize) ? compressedBufferMaxSize : frameSize) + sizeof(uint64_t) + sizeof(uint8_t);
+	const int bufferSize = PACKET_HEADER_SIZE + ((compressionEnabled && compressedBufferMaxSize > frameSize) ? compressedBufferMaxSize : frameSize);
 	unsigned char *buffer = new unsigned char[bufferSize];
+	buffer[sizeof(uint64_t) + 2*sizeof(uint8_t) - 1] = flags;
 
 	using namespace std::chrono;
 	while(isThreadRunning()) {
@@ -134,12 +139,13 @@ void StreamServerManager::threadedFunction() {
 			convertToArrayOfBytes(&ms, sizeof(ms), buffer);
 			convertToArrayOfBytes(&currentSeqNmb, sizeof(currentSeqNmb), buffer + sizeof(ms));
 
+
 			if (compressionEnabled) {
 				size_t compressedBufferSize = LZ4F_compressFrame(compressedBuffer, compressedBufferMaxSize, raw_frame, raw_frame_length, NULL);
-				convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + sizeof(ms) + sizeof(currentSeqNmb));
-				this->udpManager.Send((char*) buffer, sizeof(ms) + sizeof(currentSeqNmb) + compressedBufferSize);
+				convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + PACKET_HEADER_SIZE);
+				this->udpManager.Send((char*) buffer, PACKET_HEADER_SIZE + compressedBufferSize);
 			} else {
-				convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + sizeof(ms));
+				convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + PACKET_HEADER_SIZE);
 				this->udpManager.Send((char*) buffer, bufferSize);
 			}
 
