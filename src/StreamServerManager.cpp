@@ -150,8 +150,10 @@ void StreamServerManager::threadedFunction() {
 				convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + PACKET_HEADER_SIZE);
 				this->udpManager.Send((char*) buffer, bufferSize);
 			}
-
 			currentSeqNmb = (currentSeqNmb + 1) % 256;
+
+			// Delete frame
+			delete *it;
 
 		} else {
 	    	unlock();

@@ -218,6 +218,8 @@ bool LinearColorCalibrator::calculateCalibration() {
     
     isCalculated = true;
     
+    delete[]A;
+    delete[]b;
     
 }
 
