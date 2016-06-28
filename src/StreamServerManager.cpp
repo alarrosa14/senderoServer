@@ -110,14 +110,14 @@ void StreamServerManager::threadedFunction() {
 	size_t compressedBufferMaxSize;
 	unsigned char *compressedBuffer = NULL;
 	if (compressionEnabled) {
-		flags = flags | FRAME_DATA_COMPRESSED_MASK;
 		compressedBufferMaxSize = LZ4F_compressFrameBound(frameSize, NULL);
 		compressedBuffer = new unsigned char[compressedBufferMaxSize];
 	}
 
 	const int bufferSize = PACKET_HEADER_SIZE + ((compressionEnabled && compressedBufferMaxSize > frameSize) ? compressedBufferMaxSize : frameSize);
 	unsigned char *buffer = new unsigned char[bufferSize];
-	buffer[sizeof(uint64_t) + 2*sizeof(uint8_t) - 1] = flags;
+	const int flagsPositionInBuff = sizeof(uint64_t) + 2*sizeof(uint8_t) - 1;
+	buffer[flagsPositionInBuff] = flags;
 
 	using namespace std::chrono;
 	while(isThreadRunning()) {
@@ -144,8 +144,20 @@ void StreamServerManager::threadedFunction() {
 
 			if (compressionEnabled) {
 				size_t compressedBufferSize = LZ4F_compressFrame(compressedBuffer, compressedBufferMaxSize, raw_frame, raw_frame_length, NULL);
-				convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + PACKET_HEADER_SIZE);
-				this->udpManager.Send((char*) buffer, PACKET_HEADER_SIZE + compressedBufferSize);
+
+				//
+				// Check if compressed frame size is bigger than non-compressed frame size,
+				// this usually happen when frameSize is small and frame data has low enthropy.
+				if (compressedBufferSize >= frameSize) {
+					buffer[flagsPositionInBuff] = flags;
+					convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + PACKET_HEADER_SIZE);
+					this->udpManager.Send((char*) buffer, bufferSize);
+				} else {
+					buffer[flagsPositionInBuff] = flags | FRAME_DATA_COMPRESSED_MASK;
+					convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + PACKET_HEADER_SIZE);
+					this->udpManager.Send((char*) buffer, PACKET_HEADER_SIZE + compressedBufferSize);
+				}
+
 			} else {
 				convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + PACKET_HEADER_SIZE);
 				this->udpManager.Send((char*) buffer, bufferSize);
