@@ -151,7 +151,7 @@ void StreamServerManager::threadedFunction() {
 				if (compressedBufferSize >= frameSize) {
 					buffer[flagsPositionInBuff] = flags;
 					convertToArrayOfBytes(raw_frame, raw_frame_length, buffer + PACKET_HEADER_SIZE);
-					this->udpManager.Send((char*) buffer, bufferSize);
+					this->udpManager.Send((char*) buffer, PACKET_HEADER_SIZE + frameSize);
 				} else {
 					buffer[flagsPositionInBuff] = flags | FRAME_DATA_COMPRESSED_MASK;
 					convertToArrayOfBytes(compressedBuffer, compressedBufferSize, buffer + PACKET_HEADER_SIZE);
