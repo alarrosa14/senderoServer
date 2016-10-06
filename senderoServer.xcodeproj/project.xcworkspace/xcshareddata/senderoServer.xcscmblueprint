@@ -1,0 +1,58 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "28C978C2F25728CE59D1DB162E6FF868E8F40C88",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C7E391CFF5296CF602CBAAAAB6CD1964A75BF819" : 9223372036854775807,
+    "F130062AFA9595E8ED7519B169BC2798BE4CC8D8" : 9223372036854775807,
+    "90E2F969A762FB62C413A0C44D1F334E6EC3F531" : 9223372036854775807,
+    "28C978C2F25728CE59D1DB162E6FF868E8F40C88" : 9223372036854775807,
+    "05153AE31E01E0AD347EBCE42E8D972243E76763" : 9223372036854775807,
+    "7E804D925461714118DB355C65BC964B41D94376" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0880ACCD-ADF0-4E02-BA30-8AAAB43415A6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C7E391CFF5296CF602CBAAAAB6CD1964A75BF819" : "of_v0.9.4_RC1_osx_release\/addons\/ofxMSAOpenCL\/",
+    "F130062AFA9595E8ED7519B169BC2798BE4CC8D8" : "of_v0.9.4_RC1_osx_release\/addons\/ofxLog\/",
+    "90E2F969A762FB62C413A0C44D1F334E6EC3F531" : "of_v0.9.4_RC1_osx_release\/addons\/ofxMidi\/",
+    "28C978C2F25728CE59D1DB162E6FF868E8F40C88" : "senderoServer\/",
+    "05153AE31E01E0AD347EBCE42E8D972243E76763" : "of_v0.9.4_RC1_osx_release\/addons\/ofxMSAPingPong\/",
+    "7E804D925461714118DB355C65BC964B41D94376" : "of_v0.9.4_RC1_osx_release\/addons\/ofxUI\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "senderoServer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "senderoServer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/memo\/ofxMSAPingPong.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "05153AE31E01E0AD347EBCE42E8D972243E76763"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:alarrosa14\/senderoServer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "28C978C2F25728CE59D1DB162E6FF868E8F40C88"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rezaali\/ofxUI.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7E804D925461714118DB355C65BC964B41D94376"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/danomatika\/ofxMidi.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "90E2F969A762FB62C413A0C44D1F334E6EC3F531"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/memo\/ofxMSAOpenCL.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C7E391CFF5296CF602CBAAAAB6CD1964A75BF819"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/roxlu\/ofxLog.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F130062AFA9595E8ED7519B169BC2798BE4CC8D8"
+    }
+  ]
+}

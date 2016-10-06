@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Configuration pixelQuantity='192' installationName='Celebra1'>
+	<FrameConf>
+        <Pixel id='0' r='255' g='0' b='0' a='255' x='3' y='2' z='1.2' />
+		
+
+	</FrameConf>
+	
+</Configuration>

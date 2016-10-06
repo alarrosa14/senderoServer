@@ -1,0 +1,216 @@
+<?xml version="1.0" ?>
+<Configuration pixelQuantity='24' installationName='Celebra'>
+	<Devices>
+		<Device id='1' name='Celebra' type='mBed' ipAddress='192.168.2.10'
+			UDPPort='6454' enabled='1' />
+	</Devices>
+	<Meshes>
+        <Mesh name='sphere' path='meshes/sphere.obj' />
+		<Mesh name='cylinderShort' path='meshes/cylinderShort100.obj' />
+		<Mesh name='cylinderLong' path='meshes/cylinderLong100.obj' />
+	</Meshes>
+    <LedTypes>
+        <LedType id="0">
+            <ColorPair r0="255" g0="0" b0="0" r1="255" g1="0" b1="0"/>
+            <ColorPair r0="0" g0="255" b0="0" r1="0" g1="255" b1="0"/>
+            <ColorPair r0="0" g0="0" b0="255" r1="0" g1="0" b1="255"/>
+        </LedType>
+        <LedType id="1">
+            <ColorPair r0="255" g0="0" b0="0" r1="255" g1="0" b1="0"/>
+            <ColorPair r0="0" g0="255" b0="0" r1="0" g1="255" b1="0"/>
+            <ColorPair r0="0" g0="0" b0="255" r1="0" g1="0" b1="255"/>
+        </LedType>
+    </LedTypes>
+	<FrameConf>
+        
+        <Pixel id='0' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='10' y='10' z='0' />
+			</Render>
+		</Pixel> 
+		<Pixel id='1' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='20' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='2' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='30' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='3' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='40' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='4' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='50' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='5' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='60' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='6' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='70' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='7' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='8' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='90' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='9' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='100' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='10' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='110' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='11' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='120' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='12' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='130' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='13' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='140' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='14' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='150' y='10' z='0' />
+			</Render>
+		</Pixel>
+        <Pixel id='15' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='0' y='1' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='160' y='10' z='0' />
+			</Render>
+		</Pixel>
+		<Pixel id='16' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='0' z='10' />
+			</Render>
+		</Pixel>
+		<Pixel id='17' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='10' z='10' />
+			</Render>
+		</Pixel>
+		<Pixel id='18' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='20' z='10' />
+			</Render>
+		</Pixel>
+		<Pixel id='19' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='30' z='10' />
+			</Render>
+		</Pixel>
+		<Pixel id='20' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='40' z='10' />
+			</Render>
+		</Pixel>
+		<Pixel id='21' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='50' z='10' />
+			</Render>
+		</Pixel>
+		<Pixel id='22' r='255' g='255' b='255' a='255' device='1' ledType="1">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='60' z='10' />
+			</Render>
+		</Pixel>
+		<Pixel id='23' r='255' g='255' b='255' a='255' device='1' ledType="0">
+			<Render mesh='cylinderLong'>
+				<Front x='1' y='0' z='0' />
+				<Up x='0' y='1' z='0' />
+				<Position x='80' y='70' z='10' />
+			</Render>
+		</Pixel>
+       
+	</FrameConf>
+	<ClientsProxys>
+        <Client TCPPort='5002' UDPPort='5003' id='1' name='Sound'
+        enabled='0' blendFactor='0.2' protocolType='0' />
+        <Client TCPPort='6010' UDPPort='6011' id='2' name='Video'
+        enabled='0' blendFactor='0.2' protocolType='0' />
+	
+        <!--	<Client TCPPort='6006' UDPPort='6007' id='3' name='Kinect'
+         enabled='0' blendFactor='0.2' protocolType='0' />-->
+		<!--<Client TCPPort='6020' UDPPort='6030' id='2' name='Perlin' enabled='1' 
+			blendFactor='0.1' protocolType='1'/> 
+		<Client TCPPort='6020' UDPPort='6030' id='2' name='Video2'
+			enabled='1' blendFactor='0.1' protocolType='0' />-->
+        
+		<!--<Client TCPPort='6022' UDPPort='6024' id='4' name='Kinect'
+			enabled='0' blendFactor='0.2' protocolType='0' />-->
+	</ClientsProxys>
+    <!--<MulticastConfig UDPPort='6061' groupAddress='224.0.0.13'
+    broadcastEnabled='0' ipAddress='10.0.0.18' />-->
+	<MulticastConfig UDPPort='60001' groupAddress='224.0.0.13'
+		broadcastEnabled='0' ipAddress='ec2-54-213-36-168.us-west-2.compute.amazonaws.com' />
+</Configuration>
