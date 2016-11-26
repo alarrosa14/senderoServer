@@ -4,13 +4,16 @@ ServerClientProxy::ServerClientProxy(void)
 {
 }
 
-ServerClientProxy::ServerClientProxy(int iTCPPort, int iUDPPort, int iId, string iName, bool iEnabled, float iblendFactor, int iProtocolType, int pixelQty)
+ServerClientProxy::ServerClientProxy(int iTCPPort, int iUDPPort, int iId, string iName, bool iEnabled, bool iUsesServer, float iblendFactor, int iProtocolType, int pixelQty)
 {
 	this->TCPPort=iTCPPort;
 	this->UDPPort=iUDPPort;
 	this->id=iId;
 	this->name=iName;
 	this->enabled=iEnabled;
+	this->firstFrameReceived = false;
+	this->framesMissed = 0;
+	this->usesServer=iUsesServer;
 	this->blendFactor=iblendFactor;
     this->quadric = gluNewQuadric();
     this->protocolType=iProtocolType;
@@ -36,7 +39,8 @@ ServerClientProxy::ServerClientProxy(int iTCPPort, int iUDPPort, int iId, string
 ServerClientProxy::~ServerClientProxy(void)
 {
 	cout << "ASLKDASKDJASDK ADJASK D" << endl;
-    this->TCP.close();
+	if (this->usesServer)
+		this->TCP.close();
     this->UDP.Close();
 	vector<Pixel*>::iterator it = this->pixelsFast.begin();
 	while (it != this->pixelsFast.end())
@@ -51,6 +55,8 @@ ServerClientProxy::~ServerClientProxy(void)
 
 int ServerClientProxy::getTCPPort()
 {
+	if (!usesServer)
+		return NULL;
 	return this->TCPPort;
 }
 
@@ -121,7 +127,8 @@ DTClient* ServerClientProxy::getClientStatus()
 
 void ServerClientProxy::startListening()
 {
-	this->TCP.setup(this->TCPPort);
+	if (this->usesServer)
+		this->TCP.setup(this->TCPPort);
 	UDP.Create();
 	UDP.Bind(this->UDPPort);
 	UDP.SetNonBlocking(true);
@@ -251,11 +258,17 @@ DTFrame* ServerClientProxy::getFrameBinaryProtocol(){
 	int receivedBytes = UDP.Receive(buff,BUFFLEN);
     //copio la lectura en el buffer principal
     if (receivedBytes>0){
+    	this->framesMissed = 0;
         if((this->intBinaryBuffIndex + receivedBytes)<BUFFLEN){
             memcpy(&(this->binaryBuffer)+this->intBinaryBuffIndex,&buff,receivedBytes);
             //aumento el index del buffer
             this->intBinaryBuffIndex += receivedBytes;
         }
+    } else {
+    	// Si 60 veces lee del buffer y está vacío => "doy por muerto" al cliente
+    	// de esta forma puedo volver a levantarlo y resetear el numero de secuencia esperado.
+    	if (++this->framesMissed >= 60)
+    		this->firstFrameReceived = false;
     }
     //Cuando hay OVERFLOW, se pierden paquetes--> se da el mismo tratamiento que frente a un error--> se resincroniza mandando mensaje de error
     
@@ -277,6 +290,11 @@ DTFrame* ServerClientProxy::getFrameBinaryProtocol(){
             u_int8_t seqIdHi = this->binaryBuffer[9];
             u_int8_t seqIdLo = this->binaryBuffer[10];
             unsigned short sequence= (seqIdHi << 8) + seqIdLo;
+            if (!this->firstFrameReceived) {
+            	if (!this->usesServer)
+            		this->sequence = (sequence - 1) % 65535;
+            	this->firstFrameReceived = true;
+            }
             
             u_int8_t minIdHi = this->binaryBuffer[11];
             u_int8_t minIdLo = this->binaryBuffer[12];
@@ -533,8 +551,10 @@ void ServerClientProxy::threadedFunction(){
     startListening();
     while(isThreadRunning()) {
         this->update();
-        this->listenTCP();
-        this->synchronizeSpeeds();
+        if (this->usesServer) {
+        	this->listenTCP();
+        	this->synchronizeSpeeds();
+        }
         sleep(25);
     }
 	TCP.close();

@@ -596,6 +596,15 @@ int ServerManager::loadFromFile()
 			else{
 				return -1;
 			}
+
+			string usesServerName = "usesServer";
+			bool usesServer = false;
+			if (clientProxy->Attribute(usesServerName.c_str())){
+				usesServer = ofToInt(clientProxy->Attribute("usesServer"));
+			}
+			else{
+				return -1;
+			}
             
             string protocolTypeName = "protocolType";
 			int protocolType = 0;
@@ -632,7 +641,7 @@ int ServerManager::loadFromFile()
 				return -1;
 			}
 			
-			ServerClientProxy* newClient = new ServerClientProxy(TCPPort,UDPPort,id,name,enabled,blendFactor,protocolType, this->pixelQuantity);
+			ServerClientProxy* newClient = new ServerClientProxy(TCPPort,UDPPort,id,name,enabled,usesServer,blendFactor,protocolType, this->pixelQuantity);
             /*newClient->centroid.x=this->centroid.x;
             newClient->centroid.y=this->centroid.y;
             newClient->centroid.z=this->centroid.z;
@@ -842,7 +851,7 @@ void ServerManager::setup()
     //this->MCManager->startThread(true);
     this->SSManager->startThread(true);
     this->DVCManager->startThread(true);
-    this->midiOutController->startThread(true);
+    // this->midiOutController->startThread(true);
     vector<ServerClientProxy*>::iterator itClients;
 	itClients=this->clientsFast->begin();
 	while (itClients != this->clientsFast->end())
@@ -1253,7 +1262,7 @@ void ServerManager::exit(){
     this->SSManager->stopThread();
     this->DVCManager->stopThread();
     this->worker->stopThread();
-    this->midiOutController->stopThread();
+    // this->midiOutController->stopThread();
     
     vector<ServerClientProxy*>::iterator itClients;
 	itClients=this->clientsFast->begin();
@@ -1288,13 +1297,13 @@ void ServerManager::setGUIGeneral(){
     generalGUI->addSlider("flashG", 0.0f, 255.0f, this->flashG, length-xInit, dim);
     generalGUI->addSlider("flashB", 0.0f, 255.0f, this->flashB, length-xInit, dim);
     generalGUI->addSpacer(length-xInit, 2);
-    generalGUI->addToggle( "midi_enabled", this->midiEnabled, dim, dim);
-    generalGUI->addWidgetDown(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdON(), "midi_LThreshON")); 
-    generalGUI->addWidgetRight(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdOFF(),"midi_LThreshOFF")); 
-    generalGUI->addWidgetDown(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdON(), "midi_GThreshON")); 
-    generalGUI->addWidgetRight(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdOFF(),"midi_GThreshOFF"));
-    generalGUI->addWidgetDown(new ofxUIRotarySlider(dim*4, 0.0f, 20.0f, this->midiOutController->getVelocityMultiplier(), "midi_LVelMult")); 
-    generalGUI->addWidgetRight(new ofxUIRotarySlider(dim*4, 0.0f, 20.0f, this->midiOutController->getVelocityMultiplierGlobal(),"midi_GVelMult"));
+    // generalGUI->addToggle( "midi_enabled", this->midiEnabled, dim, dim);
+    // generalGUI->addWidgetDown(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdON(), "midi_LThreshON")); 
+    // generalGUI->addWidgetRight(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdOFF(),"midi_LThreshOFF")); 
+    // generalGUI->addWidgetDown(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdON(), "midi_GThreshON")); 
+    // generalGUI->addWidgetRight(new ofxUIRotarySlider(dim*4, 0.0f, 255.0f, this->midiOutController->getThresholdOFF(),"midi_GThreshOFF"));
+    // generalGUI->addWidgetDown(new ofxUIRotarySlider(dim*4, 0.0f, 20.0f, this->midiOutController->getVelocityMultiplier(), "midi_LVelMult")); 
+    // generalGUI->addWidgetRight(new ofxUIRotarySlider(dim*4, 0.0f, 20.0f, this->midiOutController->getVelocityMultiplierGlobal(),"midi_GVelMult"));
     generalGUI->addSpacer(length-xInit, 2);
     map<int,ClientUI*>::iterator it;
 	it=this->clientsParams->begin();
