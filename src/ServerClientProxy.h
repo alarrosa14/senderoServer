@@ -25,7 +25,7 @@ class ServerClientProxy: public ofThread
 public:
     
 	ServerClientProxy(void);
-	ServerClientProxy(int iTCPPort, int iUDPPort, int iId, string iName, bool iEnabled, float iblendFactor, int iProtocolType, int pixelQty);
+	ServerClientProxy(int iTCPPort, int iUDPPort, int iId, string iName, bool iEnabled, bool iUsesServer, float iblendFactor, int iProtocolType, int pixelQty);
 	~ServerClientProxy(void);
 	int getTCPPort();
 	int getUDPPort();
@@ -56,6 +56,9 @@ private:
     float blendFactor;
 	string name;
 	bool enabled;
+	bool usesServer;
+	bool firstFrameReceived;
+	unsigned int framesMissed; // Permite resetear sequence
     bool drawEnabled;
     int newFps;
     int pixelQuantity;
