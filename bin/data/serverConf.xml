@@ -654,12 +654,14 @@
         
 	</FrameConf>
 	<ClientsProxys>
-        <Client TCPPort='5002' UDPPort='5003' usesServer='0' id='1' name='Sound'
+        <!-- <Client TCPPort='5002' UDPPort='5003' usesServer='1' id='1' name='Sound'
+        enabled='1' blendFactor='0.7' protocolType='0' /> -->
+        <Client TCPPort='5006' UDPPort='5006' usesServer='0' id='3' name='Moods'
         enabled='1' blendFactor='0.7' protocolType='0' />
-        <!-- <Client TCPPort='5005' UDPPort='5006' usesServer='1' id='1' name='Interaction'
-        enabled='1' blendFactor='0.5' protocolType='0' />
-        <Client TCPPort='5004' UDPPort='5005' usesServer='1' id='2' name='Spout'
-        enabled='1' blendFactor='0.5' protocolType='0' />
+        <Client TCPPort='5004' UDPPort='5005' usesServer='0' id='2' name='Interaction'
+        enabled='1' blendFactor='0.7' protocolType='0' />
+        <Client TCPPort='5005' UDPPort='5004' usesServer='0' id='1' name='EAC'
+        enabled='1' blendFactor='0.7' protocolType='0' />
 		<!--<Client TCPPort='6006' UDPPort='6007' id='3' name='Kinect'
         enabled='0' blendFactor='0.2' protocolType='0' />-->
 		
