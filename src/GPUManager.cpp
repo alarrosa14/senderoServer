@@ -55,10 +55,19 @@ void GPUManager::setup(float* iAppFrame, vector<float*>* framesToBlend, vector<f
 		if(available){
 			for (int i=0;i<pixelQuantityGPU;i++){
 				//if ((currentFrame[(4*i)]!=0) || (currentFrame[(4*i)+1]!=0) || (currentFrame[(4*i)+2]!=0)){ //this is so zero values wont diminish ligh on painted pixels TODO---> erase or migrate to alpha blending
+					
+					/*
 					outBuffGPU[(4*i)] =(outBuffGPU[(4*i)]*(1- blendFact)) + (currentFrame[(4*i)] * blendFact); //R
 					outBuffGPU[(4*i)+1] = (outBuffGPU[(4*i)+1]*(1- blendFact)) + (currentFrame[(4*i)+1] * blendFact); //G
 					outBuffGPU[(4*i)+2] = (outBuffGPU[(4*i)+2]*(1- blendFact)) + (currentFrame[(4*i)+2] * blendFact); //B
 					outBuffGPU[(4*i)+3] = 1.0f; //A
+					*/
+
+					outBuffGPU[(4*i)] =(outBuffGPU[(4*i)]) + (currentFrame[(4*i)] * blendFact); //R
+					outBuffGPU[(4*i)+1] = (outBuffGPU[(4*i)+1]) + (currentFrame[(4*i)+1] * blendFact); //G
+					outBuffGPU[(4*i)+2] = (outBuffGPU[(4*i)+2]) + (currentFrame[(4*i)+2] * blendFact); //B
+					outBuffGPU[(4*i)+3] = 1.0f;
+
 				//}
 				if(outBuffGPU[(4*i)]>255)
 					outBuffGPU[(4*i)]=255;

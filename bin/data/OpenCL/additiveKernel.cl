@@ -4,6 +4,7 @@ float additiveBlend (float v1, float v2, float blendFactor){
     if (res>255.0f){
         res=255.0f;
     }
+    //return 255.0f;
     return res;
 }
 

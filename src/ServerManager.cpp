@@ -756,7 +756,7 @@ void ServerManager::setup()
     this->meshes=new map<string,ofxAssimpModelLoader*>;
 	this->ticks=0;
 	this->elapsedTicks=0;
-	this->decayFactor=0.0f;
+	this->decayFactor=0.80f;
 	this->enableDraw=true;
     this->showFrameRate=false;
     this->mouseRotEnabled=false;
@@ -775,7 +775,7 @@ void ServerManager::setup()
 	this->elapsedTicks=0;
 	this->ticks=0;
 
-    double framesPerSecond = 30;
+    double framesPerSecond = 24;
     ofSetFrameRate(framesPerSecond);
 	this->frameRateInterval = 1.0f / framesPerSecond * 1000.0f;
     
@@ -962,7 +962,7 @@ void ServerManager::workerLoop(){
         /////// TO_DO change to CPU calculation
         
         this->gpuManager->setup(this->pixelArray, framesToBlend, blendFactors, availableFrames, this->decayFactor);
-        this->gpuManager->execute();
+        //this->gpuManager->execute();
         this->pixelArray=this->gpuManager->cleanup(this->pixelArray);
 
         /////// end calculations on GPU
